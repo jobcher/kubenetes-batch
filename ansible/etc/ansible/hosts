@@ -1,0 +1,4 @@
+[webservers]
+192.168.20.232:20100 ansible_ssh_user=root ansible_ssh_pass=’200271200’
+192.168.20.233:20100 ansible_ssh_user=root ansible_ssh_pass=’200271200’
+

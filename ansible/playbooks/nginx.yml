@@ -1,0 +1,22 @@
+#nginx 配置
+---
+# 主机
+- hosts: monitor
+  vars:
+    http_port: 80
+    server_name: www.jobcher.com
+  remote_user: root
+  gather_facts: false
+  tasks:
+  - name: 安装nginx最新版
+    yum: pkg=nginx state=latest
+  - name: 写入nginx配置
+    template: src=/srv/httpd.j2 dest=/etc/nginx/nginx.conf
+    notify: 
+    - restart nginx
+  - name: 确保nginx在运行
+    service: name=httpd state=started
+  handlers:
+    - name : restart nginx
+      service: name=nginx state=reloaded
+
