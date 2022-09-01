@@ -1,0 +1,15 @@
+[nginx-lb]
+10.12.12.19
+
+[k8s:children]
+k8s-master
+k8s-worker
+
+[k8s-master]
+10.12.12.15
+10.12.12.16
+10.12.12.18
+
+[k8s-worker]
+10.12.12.20
+10.12.12.23

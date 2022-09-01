@@ -19,3 +19,11 @@ hosts
 | -K, --ask-become-pass                 | 提权密码                 |
 
 ## playbooks
+|hostname|IP|
+|:----|:----|
+|nginx-lb|10.12.12.19|
+|testk8s01|10.12.12.15|
+|testk8s02|10.12.12.16|
+|testk8s03|10.12.12.18|
+|testk8s04|10.12.12.20|
+|testk8s05|10.12.12.23|

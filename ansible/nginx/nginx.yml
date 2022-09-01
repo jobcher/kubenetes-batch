@@ -1,0 +1,23 @@
+- hosts: nginx-lb
+  vars:
+    http_port: 6443
+  remote_user: root
+  gather_facts: false
+  tasks:
+  - name: 安装net-tools并更新
+    apt: 
+      name: net-tools
+      update_cache: yes
+  - name: 安装nginx
+    apt:
+      name: nginx
+      state: latest
+  - name: 写入nginx配置
+    template: 
+      src: httpd.j2 
+      dest: /etc/nginx/nginx.conf
+  - name: 重载配置
+    shell:
+      cmd: nginx -s reload && netstat -lntp
+      chdir: /root
+    
