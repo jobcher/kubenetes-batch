@@ -65,12 +65,12 @@ apt-get update
 
 printf "##################安装软件################## \n"
 apt-get -y install docker-ce
-apt-get -y install kubectl-1.23.8 kubelet-1.23.8 kubeadm-1.23.8
+apt-get -y install kubectl-1.23.8.00 kubelet-1.23.8.00 kubeadm-1.23.8.00
 
 printf "##################配置docker参数################## \n"
 cat > /etc/docker/daemon.json <<EOF
 {
-  "registry-mirrors": ["https://gvfjy25r.mirror.aliyuncs.com"],
+  "registry-mirrors": ["https://gtit7jpb.mirror.aliyuncs.com"],
   "exec-opts": ["native.cgroupdriver=systemd"],
   "graph": ["/var/lib/docker"],
   "log-driver": "json-file",
