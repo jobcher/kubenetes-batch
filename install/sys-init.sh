@@ -27,22 +27,6 @@ printf "##################修改的桥接网络设置################## \n"
 sysctl -p /etc/sysctl.d/k8s.conf
 ls /proc/sys/net/bridge
 
-printf "##################配置apt源################## \n"
-deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
-
-deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
-
-deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
-
-deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
-
-deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
-
 printf "##################添加国内源################## \n"
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 
@@ -64,8 +48,8 @@ EOF
 apt-get update
 
 printf "##################安装软件################## \n"
-apt-get -y install docker-ce
-apt-get -y install kubectl-1.23.8.00 kubelet-1.23.8.00 kubeadm-1.23.8.00
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+apt-get -y install kubectl/kubernetes-xenial 1.23.8-00 kubelet-1.23.8-00 kubeadm-1.23.8-00
 
 printf "##################配置docker参数################## \n"
 cat > /etc/docker/daemon.json <<EOF
