@@ -12,13 +12,14 @@
     apt:
       name: nginx
       state: latest
-  - name: 写入nginx配置
+  - name: 创建配置
     file:
-      path: /etc/nginx/conf.d/kube-api-server.conf
+      path: /etc/nginx/modules-enabled/kube-api-server.conf
       state: file
+  - name: 写入数据
     template: 
       src: httpd.j2 
-      dest: /etc/nginx/conf.d/kube-api-server.conf
+      dest: /etc/nginx/modules-enabled/kube-api-server.conf
   - name: 重载配置
     shell:
       cmd: nginx -s reload && netstat -lntp

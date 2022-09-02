@@ -3,11 +3,7 @@
 printf "#######################开始设置环境##################################### \n"
 echo "127.0.0.1   $(hostname)" >> /etc/hosts
 printf "##################正在配置所有基础环境信息################## \n"
-apt install net-tools
-
-printf "##################关闭selinux################## \n"
-sed -i 's/enforcing/disabled/' /etc/selinux/config
-setenforce 0
+apt install net-tools -y
 
 printf "##################关闭swapc################## \n"
 swapoff -a  
