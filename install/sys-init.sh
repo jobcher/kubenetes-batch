@@ -3,15 +3,15 @@
 printf "#######################开始设置环境##################################### \n"
 echo "127.0.0.1   $(hostname)" >> /etc/hosts
 printf "##################正在配置所有基础环境信息################## \n"
-
-printf "##################停止当前防火墙服务################## \n"
-systemctl stop firewalld.service
-systemctl disable firewalld.service
-firewall-cmd --state
+apt install net-tools
 
 printf "##################关闭selinux################## \n"
 sed -i 's/enforcing/disabled/' /etc/selinux/config
 setenforce 0
+
+printf "##################关闭swapc################## \n"
+swapoff -a  
+sed -ri 's/.*swap.*/#&/' /etc/fstab 
 
 printf "##################加载模块################## \n"
 modprobe br_netfilter
@@ -48,22 +48,23 @@ EOF
 apt-get update
 
 printf "##################安装软件################## \n"
-curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
-apt-get -y install kubectl/kubernetes-xenial 1.23.8-00 kubelet-1.23.8-00 kubeadm-1.23.8-00
+curl -sSL https://get.daocloud.io/docker | sh
+apt-get -y install kubectl=1.23.8-00 kubelet=1.23.8-00 kubeadm=1.23.8-00
 
 printf "##################配置docker参数################## \n"
 cat > /etc/docker/daemon.json <<EOF
 {
-  "registry-mirrors": ["https://gtit7jpb.mirror.aliyuncs.com"],
-  "exec-opts": ["native.cgroupdriver=systemd"],
-  "graph": ["/var/lib/docker"],
-  "log-driver": "json-file",
-  "log-opts": {
-    "max-size": "100m"
-  },
-  "storage-driver": "overlay2"
+    "exec-opts": ["native.cgroupdriver=systemd"]
 }
+EOF
+
+
+cat > /var/lib/kubelet/config.yaml <<EOF
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+cgroupDriver: systemd
 EOF
 
 systemctl daemon-reload
 systemctl restart docker
+systemctl restart kubelet
