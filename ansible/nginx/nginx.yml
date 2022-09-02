@@ -13,9 +13,12 @@
       name: nginx
       state: latest
   - name: 写入nginx配置
+    file:
+      path: /etc/nginx/conf.d/kube-api-server.conf
+      state: file
     template: 
       src: httpd.j2 
-      dest: /etc/nginx/nginx.conf
+      dest: /etc/nginx/conf.d/kube-api-server.conf
   - name: 重载配置
     shell:
       cmd: nginx -s reload && netstat -lntp

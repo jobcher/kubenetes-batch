@@ -58,6 +58,7 @@ cat > /etc/docker/daemon.json <<EOF
 }
 EOF
 
+mkdir /var/lib/kubelet
 
 cat > /var/lib/kubelet/config.yaml <<EOF
 apiVersion: kubelet.config.k8s.io/v1beta1
@@ -68,3 +69,6 @@ EOF
 systemctl daemon-reload
 systemctl restart docker
 systemctl restart kubelet
+
+systemctl status kubelet
+systemctl status docker
