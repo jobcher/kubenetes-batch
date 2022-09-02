@@ -33,7 +33,7 @@ deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
 EOF
 apt-get update
 printf "##################安装软件################## \n"
-curl -sSL https://get.daocloud.io/docker | sh
+apt install docker-ce
 apt-get -y install kubectl=1.23.8-00 kubelet=1.23.8-00 kubeadm=1.23.8-00
 printf "##################配置docker参数################## \n"
 cat > /etc/docker/daemon.json <<EOF
