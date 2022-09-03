@@ -50,5 +50,3 @@ EOF
 systemctl daemon-reload
 systemctl restart docker
 systemctl restart kubelet
-systemctl status kubelet
-systemctl status docker
