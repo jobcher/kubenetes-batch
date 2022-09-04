@@ -5,8 +5,14 @@
 k8s-master
 k8s-worker
 
-[k8s-master]
+[k8s-master:children]
+k8s-1
+k8s-2
+
+[k8s-1]
 10.12.12.15
+
+[k8s-2]
 10.12.12.16
 10.12.12.18
 
