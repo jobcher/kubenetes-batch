@@ -63,9 +63,9 @@
     apt:
       name: 
       - docker-ce
-      - kubectl=1.23.8-00
-      - kubelet=1.23.8-00
-      - kubeadm=1.23.8-00
+      - kubectl={{k8s_version}}
+      - kubelet={{k8s_version}}
+      - kubeadm={{k8s_version}}
       update_cache: yes
     tags:
       - installk8s
