@@ -84,15 +84,20 @@
       EOF
     tags:
       - loadk8s
-  - name: 重载软件
+  - name: 重载docker
     systemd:
       state: restarted
       daemon_reload: yes
-      name:
-        - docker.service
-        - kubelet.service
+      name: docker.service
     tags:
-      - reloadk8s
+      - restartdocker
+  - name: 重载k8s
+    systemd:
+      state: restarted
+      daemon_reload: yes
+      name: kubelet.service
+    tags:
+      - restartkubelet
 
 
 
