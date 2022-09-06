@@ -7,32 +7,46 @@
   - name: 设置主机名
     shell:
       cmd: echo "127.0.0.1   $(hostname)" >> /etc/hosts
+    tags:
+      - sethosts
   - name: 安装网络插件
     apt:
       name: net-tools
       update_cache: yes
+    tags:
+      - installnet
   - name: 关闭swap
     shell: |
       swapoff -a
       sed -ri 's/.*swap.*/#&/' /etc/fstab
+    tags:
+      - swapoff
   - name: 加载模块
     shell:
       cmd: modprobe br_netfilter
+    tags:
+      - loadbr
   - name: 新建k8s.conf文件
     shell: |
       cat <<EOF >  /etc/sysctl.d/k8s.conf
       net.bridge.bridge-nf-call-ip6tables = 1
       net.bridge.bridge-nf-call-iptables = 1
       EOF
+    tags:
+      - createk8sconf
   - name: 修改的桥接网络设置
     shell:
       cmd: sysctl -p /etc/sysctl.d/k8s.conf
+    tags:
+      - connnet
   - name: 添加国内源
     shell: |
       curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | apt-key add -
       cat <<EOF >/etc/apt/sources.list.d/docker.list
       deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable
       EOF
+    tags:
+      - addccp
   - name: 更新国内源
     apt:
       name: apt-transport-https
@@ -43,14 +57,18 @@
       cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
       deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
       EOF
+    tags:
+      - addk8sccp
   - name: 安装软件
     apt:
       name: 
-      - docker.ce
+      - docker-ce
       - kubectl=1.23.8-00
       - kubelet=1.23.8-00
       - kubeadm=1.23.8-00
       update_cache: yes
+    tags:
+      - installk8s
   - name: 加载软件
     shell: |
       cat > /etc/docker/daemon.json <<EOF
@@ -64,6 +82,8 @@
       kind: KubeletConfiguration
       cgroupDriver: systemd
       EOF
+    tags:
+      - loadk8s
   - name: 重载软件
     systemd:
       state: restarted
@@ -71,6 +91,8 @@
       name:
         - docker.service
         - kubelet.service
+    tags:
+      - reloadk8s
 
 
 
