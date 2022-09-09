@@ -1,0 +1,8 @@
+version: '3'
+services:
+  headscale:
+    image: headscale/headscale
+    restart: always
+    ports: 
+      - '8080:8080'
+    
