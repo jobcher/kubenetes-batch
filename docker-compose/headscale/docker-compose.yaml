@@ -1,8 +1,13 @@
 version: '3'
 services:
   headscale:
-    image: headscale/headscale
-    restart: always
-    ports: 
-      - '8080:8080'
-    
+    image: headscale/headscale:latest
+    volumes:
+      - ./config:/etc/headscale/
+      - ./data:/var/lib/headscale
+    ports:
+      - 8080:8080
+      - 9090:9090
+      - 50443:50443
+    command: headscale serve
+    restart: unless-stopped
