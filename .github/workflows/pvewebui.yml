@@ -11,4 +11,4 @@ jobs:
         run: echo restart,pve!
 
       - name: Run restart script
-        run: sudo ssh 10.12.12.68 "sh wakeon.sh"
+        run: sudo ssh 10.12.12.68 "sh webui.sh"
