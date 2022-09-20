@@ -1,0 +1,15 @@
+# 替换SSL证书
+- hosts: ssl
+  remote_user: root
+  gather_facts: false
+  tasks:
+  - name: 拷贝覆盖并备份
+    copy:
+      src: ./{{item}}
+      dest: /usr/local/nginx/conf/CA
+      backup: yes
+    with_items:
+      ['FullSSL.crt','SSL.key']
+  - name: nginx重载
+    shell:
+      cmd: sudo nginx -s reload
