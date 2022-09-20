@@ -1,0 +1,14 @@
+# Restart PveWebUI
+name: RestartPveWebUI
+on:
+  workflow_dispatch:
+jobs:
+  restart:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - name: Restart PveWebUI
+        run: echo restart,pve!
+
+      - name: Run restart script
+        run: sudo ssh 10.12.12.68 "sh wakeon.sh"

@@ -1,6 +1,6 @@
 # github CI/CD test
 
-name: RestartPveWebUI
+name: test
 # Triggers
 on: 
   push:
