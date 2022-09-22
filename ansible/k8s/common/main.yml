@@ -5,28 +5,38 @@
   gather_facts: false
   tasks:
   - name: 设置主机名
+    become: yes
+    become_method: sudo
     shell:
       cmd: echo "127.0.0.1   $(hostname)" >> /etc/hosts
     tags:
       - sethosts
   - name: 安装网络插件
+    become: yes
+    become_method: sudo
     apt:
       name: net-tools
       update_cache: yes
     tags:
       - installnet
   - name: 关闭swap
+    become: yes
+    become_method: sudo
     shell: |
       swapoff -a
       sed -ri 's/.*swap.*/#&/' /etc/fstab
     tags:
       - swapoff
   - name: 加载模块
+    become: yes
+    become_method: sudo
     shell:
       cmd: modprobe br_netfilter
     tags:
       - loadbr
   - name: 新建k8s.conf文件
+    become: yes
+    become_method: sudo
     shell: |
       cat <<EOF >  /etc/sysctl.d/k8s.conf
       net.bridge.bridge-nf-call-ip6tables = 1
@@ -35,11 +45,15 @@
     tags:
       - createk8sconf
   - name: 修改的桥接网络设置
+    become: yes
+    become_method: sudo
     shell:
       cmd: sysctl -p /etc/sysctl.d/k8s.conf
     tags:
       - connnet
   - name: 添加国内源
+    become: yes
+    become_method: sudo
     shell: |
       curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | apt-key add -
       cat <<EOF >/etc/apt/sources.list.d/docker.list
@@ -48,10 +62,14 @@
     tags:
       - addccp
   - name: 更新国内源
+    become: yes
+    become_method: sudo
     apt:
       name: apt-transport-https
       update_cache: yes
   - name: 添加k8s源
+    become: yes
+    become_method: sudo
     shell: |
       curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
       cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
@@ -60,6 +78,8 @@
     tags:
       - addk8sccp
   - name: 安装软件
+    become: yes
+    become_method: sudo
     apt:
       name: 
       - docker-ce
@@ -70,6 +90,8 @@
     tags:
       - installk8s
   - name: 加载软件
+    become: yes
+    become_method: sudo
     shell: |
       cat > /etc/docker/daemon.json <<EOF
       {
@@ -85,6 +107,8 @@
     tags:
       - loadk8s
   - name: 重载docker
+    become: yes
+    become_method: sudo
     systemd:
       state: restarted
       daemon_reload: yes
@@ -92,6 +116,8 @@
     tags:
       - restartdocker
   - name: 重载k8s
+    become: yes
+    become_method: sudo
     systemd:
       state: restarted
       daemon_reload: yes

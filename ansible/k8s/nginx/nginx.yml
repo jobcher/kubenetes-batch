@@ -6,22 +6,32 @@
   gather_facts: false
   tasks:
   - name: 安装net-tools并更新
+    become: yes
+    become_method: sudo
     apt: 
       name: net-tools
       update_cache: yes
   - name: 安装nginx
+    become: yes
+    become_method: sudo
     apt:
       name: nginx
       state: latest
   - name: 创建配置
+    become: yes
+    become_method: sudo
     file:
       path: /etc/nginx/modules-enabled/kube-api-server.conf
       state: file
   - name: 写入数据
+    become: yes
+    become_method: sudo
     template: 
       src: httpd.j2 
       dest: /etc/nginx/modules-enabled/kube-api-server.conf
   - name: 重载配置
+    become: yes
+    become_method: sudo
     shell:
       cmd: nginx -s reload && netstat -lntp
       chdir: /root
