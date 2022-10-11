@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rocketmq-nfs-client-provisioner
+  namespace: sanjiang
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rocketmq-nfs-client-provisioner
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: rocketmq-nfs-client-provisioner
+    spec:
+      serviceAccount: nfs-provisioner
+      containers:
+        - name: rocketmq-nfs-client-provisioner
+          image: registry.cn-hangzhou.aliyuncs.com/open-ali/nfs-client-provisioner
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: nfs-client-root
+              mountPath:  /persistentvolumes
+          env:
+            - name: PROVISIONER_NAME
+              value: rocketmq/nfs
+            - name: NFS_SERVER
+              value: 193.0.40.171
+            - name: NFS_PATH
+              value: /data/storage/k8s/rocketmq
+      volumes:
+        - name: nfs-client-root
+          nfs:
+            server: 193.0.40.171
+            path: /data/storage/k8s/rocketmq

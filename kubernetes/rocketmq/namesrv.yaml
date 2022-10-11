@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mq-namesrv
+  name: rocketmq
+  namespace: sanjiang
+spec:
+  ports:
+  - port: 9876
+    targetPort: 9876
+    nodePort: 32076
+    name: namesrv-port
+  selector:
+    app: mq-namesrv
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rocketmq
+  namespace: sanjiang
+spec:
+  serviceName: rocketmq
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mq-namesrv
+  template:
+    metadata:
+     labels:
+       app: mq-namesrv
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                      - mq-namesrv
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: mq-namesrv
+        image: liuyi71sinacom/rocketmq-4.8.0
+        imagePullPolicy: IfNotPresent
+        command: ["sh","/usr/local/rocketmq-4.8.0/bin/mqnamesrv"]
+        ports:
+        - containerPort: 9876
+          protocol: TCP
+        env:
+        - name: JAVA_OPT
+          value: "-server -XX:ParallelGCThreads=1 -Xms1g -Xmx1g -Xmn512m"
+          #value: "-XX:MaxRAMPercentage=80.0"
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh","-c","touch /tmp/health"]
+        livenessProbe:
+          exec:
+            command: ["test","-e","/tmp/health"]
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          tcpSocket:
+            port: 9876
+          initialDelaySeconds: 15
+          timeoutSeconds: 5
+          periodSeconds: 20
