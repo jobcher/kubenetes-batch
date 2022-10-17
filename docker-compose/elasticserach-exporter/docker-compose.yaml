@@ -1,0 +1,14 @@
+version: '3'
+services:
+  elasticsearch_exporter:
+    image: quay.io/prometheuscommunity/elasticsearch-exporter:latest
+    command:      
+      - '--es.all'
+      - '--es.indices'
+      - '--es.cluster_settings'
+      - '--es.indices_settings'
+      - '--es.shards'
+      - '--es.uri=http://193.0.10.28:9100'
+    restart: always
+    ports:
+    - 9114:9114
