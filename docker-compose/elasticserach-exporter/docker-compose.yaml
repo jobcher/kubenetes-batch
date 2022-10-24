@@ -8,7 +8,7 @@ services:
       - '--es.cluster_settings'
       - '--es.indices_settings'
       - '--es.shards'
-      - '--es.uri=http://193.0.10.28:9100'
+      - '--es.uri=http://193.0.0.28:9100'
     restart: always
     ports:
     - 9114:9114
