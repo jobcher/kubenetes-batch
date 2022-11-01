@@ -1,0 +1,8 @@
+version: '3'
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: clouded
+    # ${cloud-token} 是你自己的token值
+    command: tunnel --no-autoupdate run --token ${cloud-token}
+    restart: always

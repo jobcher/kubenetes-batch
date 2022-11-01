@@ -8,8 +8,6 @@ services:
       - 5000:5000
     volumes:
       - /data/nexus:/nexus-data
-    environment:
-      - INSTALL4J_ADD_VM_PARAMS=-Xms1024m -Xmx1024m -XX:MaxDirectMemorySize=1024m -Djava.util.prefs.userRoot=/some-other-dir
     restart: always
     # 赋予外部root权限
     privileged: true
