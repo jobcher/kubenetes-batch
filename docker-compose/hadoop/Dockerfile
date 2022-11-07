@@ -6,7 +6,7 @@ LABEL description="this is hadoop images"
 USER root
 # 安装java
 RUN mkdir -p /export/server
-ADD https://repo.huaweicloud.com/java/jdk/8u152-b16/jdk-8u152-linux-x64.tar.gz /export/server
+ADD jdk-8u152-linux-x64.tar.gz /export/server
 
 # 下载解压
 ADD https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-3.3.1/hadoop-3.3.1.tar.gz /export/server
