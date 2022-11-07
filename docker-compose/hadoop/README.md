@@ -10,3 +10,7 @@
 |hadoop-slave|DataNode|NodeManager|
 
 ## 下载地址
+```sh
+wget -c https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-3.3.1/hadoop-3.3.1.tar.gz
+wget -c https://repo.huaweicloud.com/java/jdk/8u152-b16/jdk-8u152-linux-x64.tar.gz
+```

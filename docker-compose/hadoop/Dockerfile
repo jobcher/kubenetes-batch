@@ -9,7 +9,7 @@ RUN mkdir -p /export/server
 ADD jdk-8u152-linux-x64.tar.gz /export/server
 
 # 下载解压
-ADD https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-3.3.1/hadoop-3.3.1.tar.gz /export/server
+ADD hadoop-3.3.1.tar.gz /export/server
 # 配置
 ENV JAVA_HOME=/export/server/jdk-8u152
 ENV PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
