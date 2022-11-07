@@ -1,0 +1,6 @@
+version: '3'
+services:
+  hadoop-master:
+    build:
+      context: .
+      dockerfile: Dockerfile

@@ -8,3 +8,5 @@
 |:----|:----|:----|
 |hadoop-master|NameNode|ResourceManager|
 |hadoop-slave|DataNode|NodeManager|
+
+## 下载地址
