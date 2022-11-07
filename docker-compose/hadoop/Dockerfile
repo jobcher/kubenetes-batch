@@ -5,6 +5,7 @@ LABEL description="this is hadoop images"
 
 USER root
 # 安装java
+RUN yum install wget -y
 RUN mkdir -p /export/server && \
     cd /export/server && \
     wget https://repo.huaweicloud.com/java/jdk/8u152-b16/jdk-8u152-linux-x64.tar.gz && \
