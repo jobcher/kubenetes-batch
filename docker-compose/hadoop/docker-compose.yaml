@@ -1,6 +1,11 @@
 version: '3'
 services:
   hadoop-master:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: sjtfreaks/hadoop:v1.0
+    volumes:
+      - /data/hadoop/etc:/export/server/hadoop-3.3.1/etc
+    ports:
+      - 9870:9870
+      - 8088:8088
+    command: $HADOOP_HOME/bin/hdfs --daemon start namenode
+    
