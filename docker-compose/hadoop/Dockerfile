@@ -5,18 +5,19 @@ LABEL description="this is hadoop images"
 
 USER root
 # 安装java
-RUN mkdir -p /export/server
-ADD jdk-8u351-linux-x64.tar.gz /export/server
+RUN mkdir -p /export/server && \
+    cd /export/server && \
+    wget https://repo.huaweicloud.com/java/jdk/8u152-b16/jdk-8u152-linux-x64.tar.gz && \
+    tar -zxvf jdk-8u152-linux-x64.tar.gz /export/server
 
 # 下载解压
-RUN mkdir /export/server && \
-    cd /export/server && \
-    wget https://archive.apache.org/dist/hadoop/common/hadoop-3.3.0/hadoop-3.3.0.tar.gz && \
-    tar -zxvf hadoop-3.3.0.tar.gz
+RUN cd /export/server && \
+    wget https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-3.3.1/hadoop-3.3.1.tar.gz && \
+    tar -zxvf hadoop-3.3.1.tar.gz
 # 配置
-ENV JAVA_HOME=/export/server/jdk-8u351 
+ENV JAVA_HOME=/export/server/jdk-8u152
 ENV PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 ENV CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 ENV HDFS_NAMENODE_USER=root HDFS_DATANODE_USER=root HDFS_SECONDARYNAMENODE_USER=root YARN_RESOURCEMANAGER_USER=root YARN_NODEMANAGER_USER=root
-ENV HADOOP_HOME=/export/server/hadoop-3.3.0
+ENV HADOOP_HOME=/export/server/hadoop-3.3.1
 EXPOSE 9870 8088
