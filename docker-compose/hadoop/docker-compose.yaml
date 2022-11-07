@@ -7,5 +7,5 @@ services:
     ports:
       - 9870:9870
       - 8088:8088
-    command: $HADOOP_HOME/bin/hdfs --daemon start namenode
+    command: /export/server/hadoop-3.3.1/bin/hdfs --daemon start namenode
     
