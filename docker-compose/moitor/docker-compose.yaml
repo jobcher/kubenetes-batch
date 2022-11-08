@@ -23,7 +23,7 @@ services:
         hostname: grafana
         restart: always
         network_mode: host
-        
+
     #node
     node_exporter:
       image: prom/node-exporter:v1.3.1
@@ -35,3 +35,16 @@ services:
       restart: unless-stopped
       volumes:
         - '/:/host:ro,rslave'
+
+#群晖·
+    snmp-exporter:
+      image: prom/snmp-exporter
+      container_name: snmp_exporter
+      restart: unless-stopped
+      volumes:
+        - ./snmp_exporter/:/etc/snmp_exporter/
+        - ./snmp-synology/snmp.yml:/etc/snmp_exporter/snmp.yml
+      ports:
+        - 9116:9116
+      command:
+        - "--config.file=/etc/snmp_exporter/snmp.yml"

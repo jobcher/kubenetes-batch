@@ -41,11 +41,11 @@ scrape_configs:
     - targets: ['10.10.12.235']
     metrics_path: /snmp
     params:
-      module: [synology]
+      module: [home]
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: 10.10.12.235:9116
+        replacement: 10.10.12.13:9116
