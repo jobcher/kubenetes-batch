@@ -38,10 +38,10 @@ scrape_configs:
 #新增 群晖
   - job_name: 'snmp-exporter'
     static_configs:
-    - targets: ['10.10.12.235']
+    - targets: ['10.10.12.1']
     metrics_path: /snmp
     params:
-      module: [home]
+      module: [pubilc]
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
