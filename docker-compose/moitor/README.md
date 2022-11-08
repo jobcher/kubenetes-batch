@@ -3,7 +3,7 @@
 ## 创建目录
 ```sh
 # 创建目录
-mkdir -p /data/
+mkdir -p ./gfafana
 ```
 
 ##
