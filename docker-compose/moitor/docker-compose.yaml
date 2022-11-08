@@ -34,3 +34,15 @@ services:
       restart: always
       volumes:
       - './snmp_exporter/:/etc/snmp_exporter/'
+
+    #node
+    node_exporter:
+      image: prom/node-exporter:v1.3.1
+      container_name: node_exporter
+      command:
+        - '--path.rootfs=/host'
+      network_mode: host
+      pid: host
+      restart: unless-stopped
+      volumes:
+        - '/:/host:ro,rslave'
