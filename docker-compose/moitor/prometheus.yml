@@ -41,7 +41,7 @@ scrape_configs:
     - targets: ['10.10.12.1']
     metrics_path: /snmp
     params:
-      module: [pubilc]
+      module: [if_mib]
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
