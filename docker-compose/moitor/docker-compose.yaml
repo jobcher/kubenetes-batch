@@ -19,6 +19,7 @@ services:
 
     grafana:
         image: grafana/grafana
+        user: 1001:1001
         container_name: grafana
         hostname: grafana
         restart: always
