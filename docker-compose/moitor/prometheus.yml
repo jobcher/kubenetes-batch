@@ -30,7 +30,7 @@ scrape_configs:
 #新增 node
   - job_name: node
     static_configs:
-    - targets: ['node-exporter:9100']
+    - targets: ['10.12.12.235:9100']
 #新增 群晖
   - job_name: 'snmp-exporter'
     static_configs:
@@ -44,4 +44,4 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: 10.10.12.235:9116
+        replacement: 10.10.12.13:9116
