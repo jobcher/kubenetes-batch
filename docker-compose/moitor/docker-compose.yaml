@@ -42,7 +42,8 @@ services:
       container_name: snmp_exporter
       restart: unless-stopped
       volumes:
-        - ./snmp-exporter/snmp.yml:/etc/snmp_exporter/snmp.yml
+        - ./snmp_exporter/:/etc/snmp_exporter/
+        - ./snmp_exporter/snmp.yml:/etc/snmp_exporter/snmp.yml
       ports:
         - 9116:9116
       command:
