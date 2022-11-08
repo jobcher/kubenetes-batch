@@ -26,7 +26,7 @@ services:
         depends_on:  
           - prometheus
         volumes:
-          - ./grafana/:/var/lib/grafana
+          - ./grafana:/var/lib/grafana
         network_mode: host
 
     #node
