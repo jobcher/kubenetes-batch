@@ -35,7 +35,7 @@ scrape_configs:
       - "./file_sd/node-exporter.yaml"
       refresh_interval: 5s
 
-#新增 群晖
+#新增 snmp_exporter
   - job_name: 'snmp-exporter'
     static_configs:
     - targets: ['10.10.12.1']
