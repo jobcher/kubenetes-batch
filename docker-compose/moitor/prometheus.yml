@@ -27,10 +27,14 @@ scrape_configs:
 
     static_configs:
       - targets: ["localhost:9090"]
-#新增 node
-  - job_name: node
-    static_configs:
-    - targets: ['10.12.12.235:9100']
+#新增 node_exporter
+  - job_name: 'node-exporter'
+    scrape_interval: 15s
+    file_sd_configs:
+    - files:
+      - "./file_sd/node-exporter.yaml"
+      refresh_interval: 5s
+
 #新增 群晖
   - job_name: 'snmp-exporter'
     static_configs:
