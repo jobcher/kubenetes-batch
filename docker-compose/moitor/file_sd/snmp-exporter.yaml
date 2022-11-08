@@ -1,7 +1,3 @@
 - targets: ['10.12.12.1']
   labels:
     instance: ikuai
-
-- targets: ['10.12.12.6']
-  labels:
-    instance: netear
