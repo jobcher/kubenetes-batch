@@ -58,6 +58,8 @@ scrape_configs:
   - job_name: 'synology'
     static_configs:
     - targets: ['10.12.12.235']
+      labels:
+        instance: synology
     metrics_path: /snmp
     params:
       module: [synology]
