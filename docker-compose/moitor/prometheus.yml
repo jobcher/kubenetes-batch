@@ -52,14 +52,16 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: 10.12.12.13:9116
-#新增 snmp_exporter(JGS524Ev2-netear)
-  - job_name: 'network'
-    scrape_interval: 15s
+
+
+#新增 snmp_exporter(synology)
+  - job_name: 'synology'
     static_configs:
-    - targets: ['10.12.12.6']
+    - targets: ['10.12.12.235']
     metrics_path: /snmp
     params:
-      module: [arista_sw]
+      module: [synology]
+      community: [synology]
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -67,18 +69,3 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: 10.12.12.13:9116
-
-#新增 snmp_exporter(synology)
-  # - job_name: 'synology'
-  #   static_configs:
-  #   - targets: ['10.12.12.235']
-  #   metrics_path: /snmp
-  #   params:
-  #     module: [synology]
-  #   relabel_configs:
-  #     - source_labels: [__address__]
-  #       target_label: __param_target
-  #     - source_labels: [__param_target]
-  #       target_label: instance
-  #     - target_label: __address__
-  #       replacement: 10.12.12.13:9116
