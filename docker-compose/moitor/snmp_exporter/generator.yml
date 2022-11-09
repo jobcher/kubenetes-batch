@@ -1,0 +1,30 @@
+modules:
+  h3c:  
+    walk:       
+      - 1.3.6.1.2.1.2              
+      - sysUpTime
+      - sysDescr
+      - sysName                
+      - 1.3.6.1.2.1.31
+    version: 2 
+    max_repetitions: 25 
+    retries: 3   
+    timeout: 5s 
+    auth:
+      community: sanjiang
+    lookups:
+      - source_indexes: [ifIndex]
+        lookup: ifAlias
+      - source_indexes: [ifIndex]
+        lookup: 1.3.6.1.2.1.2.2.1.2
+      - source_indexes: [ifIndex]
+        lookup: 1.3.6.1.2.1.31.1.1.1.1
+    overrides:
+      ifAlias:
+        ignore: true
+      ifDescr:
+        ignore: true
+      ifName:
+        ignore: true
+      ifType:
+        type: EnumAsInfo
