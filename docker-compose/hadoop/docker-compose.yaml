@@ -1,11 +1,38 @@
-version: '3'
+version: "3"
+
 services:
   hadoop-master:
-    image: sjtfreaks/hadoop:v1.0
-    volumes:
-      - /data/hadoop/etc:/export/server/hadoop-3.3.1/etc
+    image: hadoop:latest
     ports:
-      - 9870:9870
-      - 8088:8088
-    command: /export/server/hadoop-3.3.1/bin/hdfs --daemon start namenode
-    
+      - "9870:9870"
+      - "50070:50070"
+      - "8088:8088"
+    networks:
+      - docker0
+    volumes:
+      - v_master:/opt/hdp/tmp
+    container_name: hadoop101
+
+  hadoop-slave1:
+    image: hadoop:latest
+    networks:
+      - docker0
+    volumes:
+      - v_slave1:/opt/hdp/tmp
+    container_name: hadoop102
+
+  hadoop-slave2:
+    image: hadoop:latest
+    networks:
+      - docker0
+    volumes:
+      - v_slave2:/opt/hdp/tmp
+    container_name: hadoop103
+
+networks:
+  docker0:
+
+volumes:
+  v_master:
+  v_slave1:
+  v_slave2:
