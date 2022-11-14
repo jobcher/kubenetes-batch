@@ -1,7 +1,5 @@
 FROM docker.io/bitnami/spark:3
-LABEL maintainer="jobcher <nb@nbtyfood.com>"
-LABEL description="Docker image with Spark (3.1.2) and Hadoop (3.3.0), based on bitnami/spark:3. \
-For more information, please visit https://github.com/jobcher/kubenetes-batch."
+LABEL maintainer="jobcher"
 
 USER root
 
