@@ -17,7 +17,8 @@ wget -c https://repo.huaweicloud.com/java/jdk/8u152-b16/jdk-8u152-linux-x64.tar.
 
 ## 创建配置
 ```sh
-mkdir -p /data/hadoop/etc
+# 生成镜像
+docker build -t hadoop .
 # 运行集群
 docker-compose up -d
 ```
