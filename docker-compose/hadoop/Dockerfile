@@ -1,4 +1,4 @@
-FROM centos:centos7
+FROM centos:centos7.9.2009
 LABEL maintainer="jobcher"
 
 USER root
@@ -8,6 +8,7 @@ WORKDIR /opt/hdp
 ADD jdk-8u152-linux-x64.tar.gz ./
 ADD hadoop-3.3.1.tar.gz ./
 # 安装 ssh 服务
+RUN yum clean all && yum makecache
 RUN yum install -y openssh-server openssh-clients rsync vim\
         && ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N "" -q \
         && ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N "" -q \
