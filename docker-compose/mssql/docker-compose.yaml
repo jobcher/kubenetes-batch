@@ -1,0 +1,14 @@
+version: '3'
+services:
+  mssql-db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    user: root
+    container_name: mssql-db
+    restart: "always"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=password #密码
+    ports:
+      - 1433:1433
+    volumes:
+      - /mnt/iscsi/mssql:/var/opt/mssql/data
