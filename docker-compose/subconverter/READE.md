@@ -7,7 +7,7 @@
 ## Dockerfile编译
 ```sh
 docker build -t sjtfreaks/subconverter .
-docker push
+docker push sjtfreaks/subconverter:latest
 ```
 
 ## docker-compose发布
