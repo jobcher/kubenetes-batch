@@ -6,7 +6,7 @@ services:
     restart: "always"
     volumes: 
       - "/etc/localtime:/etc/localtime:ro"
-      - "poste-data:/data"
+      - "/poste-data:/data"
     hostname: "mail.nbtyfood.com"
     ports: 
       - "25:25"
@@ -19,6 +19,3 @@ services:
       - "993:993"
       - "995:995"
       - "4190:4190"
-  
-volumes: 
-  poste-data:
