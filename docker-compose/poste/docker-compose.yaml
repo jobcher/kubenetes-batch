@@ -8,14 +8,4 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
       - "/poste-data:/data"
     hostname: "mail.nbtyfood.com"
-    ports: 
-      - "25:25"
-      - "80:80"
-      - "110:110"
-      - "143:143"
-      - "443:443"
-      - "465:465"
-      - "587:587"
-      - "993:993"
-      - "995:995"
-      - "4190:4190"
+    network_mode: host
