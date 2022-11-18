@@ -20,7 +20,8 @@ docker-compose --version
 ## 创建目录
 ```sh
 # 创建目录
-mkdir -p ./gfafana
+mkdir -p ./grafana
+chmod +777 -R grafana/
 ```
 ## 运行docker-compose
 >docker-compose up -d
