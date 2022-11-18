@@ -1,0 +1,8 @@
+version: '3'
+services:
+  retroarch-web:
+    image: inglebard/retroarch-web:latest
+    container_name: retroarch-web
+    restart: "always"
+    ports:
+      - 80:80
