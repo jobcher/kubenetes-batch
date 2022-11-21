@@ -5,4 +5,5 @@ services:
     container_name: github-runner
     restart: "always"
     command:
-      - "./config.sh --url https://github.com/jobcher/kubenetes-batch --token TOKEN && ./run.sh"
+      - "./config.sh --url https://github.com/jobcher/kubenetes-batch --token AHOUHYRR76C7OPIDCAJQXSTDPLYES"
+      - "./run.sh"
