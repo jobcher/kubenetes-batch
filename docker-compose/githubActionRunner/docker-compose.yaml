@@ -1,0 +1,9 @@
+version: '3'
+services:
+  github-runner:
+    image: sjtfreaks/github-runner:v1.0
+    container_name: github-runner
+    restart: "always"
+    command:
+      - "./config.sh --url https://github.com/jobcher/kubenetes-batch --token TOKEN"
+      - "./run.sh"
