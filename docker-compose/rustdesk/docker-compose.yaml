@@ -1,0 +1,12 @@
+version: '3'
+services:
+  rustdesk-builder:
+    image: sjtfreaks/rustdesk-builder:v1
+    container_name: rustdesk-builder
+    volumes:
+      - $PWD:/home/user/rustdesk
+      - rustdesk-git-cache:/home/user/.cargo/git
+      - rustdesk-registry-cache:/home/user/.cargo/registry
+    environment:
+      PUID: "$(id -u)"
+      PGID: "$(id -g)"
