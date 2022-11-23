@@ -1,12 +1,22 @@
 version: '3'
 services:
-  rustdesk-builder:
-    image: sjtfreaks/rustdesk-builder:v1
-    container_name: rustdesk-builder
+  hbbs:
+    image: rustdesk/rustdesk-server:latest
+    container_name: hbbs
     volumes:
-      - $PWD:/home/user/rustdesk
-      - rustdesk-git-cache:/home/user/.cargo/git
-      - rustdesk-registry-cache:/home/user/.cargo/registry
-    environment:
-      PUID: "$(id -u)"
-      PGID: "$(id -g)"
+      - $PWD:/root
+    ports:
+      - 21115:21115
+      - 21116:21116
+      - 21116:21116/udp
+      - 21118:21118
+    network_mode: host
+  hbbr:
+    image: rustdesk/rustdesk-server:latest
+    container_name: hbbr
+    volumes:
+      - $PWD:/root
+    ports:
+      - 21117:21117
+    network_mode: host
+
