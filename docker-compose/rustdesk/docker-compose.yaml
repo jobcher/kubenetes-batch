@@ -3,6 +3,7 @@ services:
   hbbs:
     image: rustdesk/rustdesk-server:latest
     container_name: hbbs
+    restart: always
     volumes:
       - $PWD:/root
     ports:
@@ -15,6 +16,7 @@ services:
   hbbr:
     image: rustdesk/rustdesk-server:latest
     container_name: hbbr
+    restart: always
     volumes:
       - $PWD:/root
     ports:
