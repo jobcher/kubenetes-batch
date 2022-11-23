@@ -11,6 +11,7 @@ services:
       - 21116:21116/udp
       - 21118:21118
     network_mode: host
+    command: hbbs
   hbbr:
     image: rustdesk/rustdesk-server:latest
     container_name: hbbr
@@ -19,4 +20,5 @@ services:
     ports:
       - 21117:21117
     network_mode: host
+    command: hbbr
 
