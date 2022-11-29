@@ -7,5 +7,4 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./license:/home/vocechat-server/data/license
-      
+      - ./data:/home/vocechat-server/data/
