@@ -6,4 +6,6 @@ services:
     container_name: vocechat-server
     ports:
       - 3000:3000
-    
+    volumes:
+      - ./license:/home/vocechat-server/data/license
+      
