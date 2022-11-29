@@ -1,10 +1,13 @@
 version: '3'
 services:
   vocechat:
-    image: privoce/vocechat-server:latest
+    image: privoce/vocechat-server:v0.3.12
     restart: always
     container_name: vocechat-server
     ports:
       - 3000:3000
     volumes:
       - ./data:/home/vocechat-server/data/
+      - /etc/localtime:/etc/localtime
+    command:
+      - --network.frontend_url https://chat.jobcher.com
