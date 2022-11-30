@@ -33,7 +33,7 @@ scrape_configs:
     metrics_path: /metrics
     scheme: http
     consul_sd_configs:
-      - server: 10.12.12.12:8500
+      - server: localhost:8500
         services:
           - node_exporter
 
@@ -62,7 +62,7 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: 10.12.12.12:9116
+        replacement: localhost:9116
 
 
 #新增 snmp_exporter(synology)
@@ -81,4 +81,4 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: 10.12.12.12:9116
+        replacement: localhost:9116
