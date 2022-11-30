@@ -1,3 +1,6 @@
 - targets: ['10.12.12.235:9100']
   labels:
     instance: synology
+- targets: ['localhost:9100']
+  labels:
+    instance: localhost
