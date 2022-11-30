@@ -10,6 +10,14 @@ services:
             - ./file_sd:/etc/prometheus/file_sd
         network_mode: host
 
+    consul: #服务发现
+      image: consul:1.14.1
+      container_name: consul
+      hostname: consul
+      restart: always
+      command: ["consul","agent","-server","-bootstrap","-data-dir","/consul","-ui","-bind","127.0.0.1","-client","0.0.0.0"]
+      network_mode: host
+
     alertmanager:  #预警模块
         image: prom/alertmanager
         container_name: alertmanager
