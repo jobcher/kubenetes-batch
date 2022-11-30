@@ -1,19 +1,34 @@
 {
-    "service": {
-        "name": "node_exporter",
-        "tags": [
-            "exporter"
-        ],
-        "port": 9100,
-        "address": [
-            "10.12.12.12",
-            "10.12.12.235"
-        ],
-        "checks": [  
-            {  
-                "http": "http://localhost:9100",  
-                "interval": "5s"  
-            }  
-        ]  
-    }
+    "services": [
+        {
+            "id": "localhost",
+            "name": "node_exporter",
+            "address": "localhost",
+            "tags": [
+                "exporter"
+            ],
+            "port": 9100,
+            "checks": [  
+                {  
+                    "http": "http://localhost:9100",  
+                    "interval": "5s"  
+                }  
+            ]
+        },
+        {
+            "id": "10.12.12.235",
+            "name": "node_exporter",
+            "address": "10.12.12.235",
+            "tags": [
+                "exporter"
+            ],
+            "port": 9100,
+            "checks": [  
+                {  
+                    "http": "http://10.12.12.235:9100",  
+                    "interval": "5s"  
+                }  
+            ]
+        }
+    ]
 }
