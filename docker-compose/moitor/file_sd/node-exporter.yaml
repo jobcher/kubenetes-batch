@@ -4,3 +4,6 @@
 - targets: ['localhost:9100']
   labels:
     instance: localhost
+- targets: ['10.12.12.68:9100']
+  labels:
+    instance: pve
