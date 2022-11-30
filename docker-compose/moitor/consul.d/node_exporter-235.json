@@ -1,0 +1,15 @@
+{
+    "service": {
+        "name": "node_exporter",
+        "tags": [
+            "exporter"
+        ],
+        "port": 9100,
+        "checks": [  
+            {  
+                "http": "http://10.12.12.235:9100",  
+                "interval": "5s"  
+            }  
+        ]  
+    }
+}
