@@ -16,7 +16,7 @@ services:
       hostname: consul
       restart: always
       command:
-        - consul agent -dev -config-dir=/etc/consul.d
+        - consul agent -dev
       volumes:
         - ./consul.d:/etc/consul.d
       network_mode: host
