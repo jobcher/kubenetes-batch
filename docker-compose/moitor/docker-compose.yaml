@@ -16,7 +16,7 @@ services:
       hostname: consul
       restart: always
       command:
-        - consul agent -dev
+        - consul agent -server -bootstrap -data-dir /consul -ui -bind 127.0.0.1 -client 0.0.0.0
       volumes:
         - ./consul.d:/etc/consul.d
       network_mode: host
