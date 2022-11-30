@@ -1,6 +1,6 @@
 version: '3'
 services:
-    prometheus:
+    prometheus: #监控
         image: prom/prometheus
         container_name: prometheus
         hostname: prometheus
@@ -17,7 +17,7 @@ services:
         restart: always
         network_mode: host
 
-    grafana:
+    grafana: #监控面板
         image: grafana/grafana
         user: 1001:1001
         container_name: grafana
@@ -30,7 +30,7 @@ services:
         network_mode: host
 
     #node
-    node_exporter:
+    node_exporter: #监控主机
       image: prom/node-exporter:v1.3.1
       container_name: node_exporter
       command:
