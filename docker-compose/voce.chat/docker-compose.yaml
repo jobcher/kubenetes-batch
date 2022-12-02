@@ -1,7 +1,7 @@
 version: '3'
 services:
   vocechat:
-    image: privoce/vocechat-server:v0.3.12
+    image: privoce/vocechat-server:latest
     restart: always
     container_name: vocechat-server
     ports:
