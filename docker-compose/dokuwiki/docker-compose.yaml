@@ -9,15 +9,4 @@ services:
     volumes:
       - './dokuwiki_data:/bitnami/dokuwiki'
     restart: always
-    environment:
-      - DOKUWIKI_WIKI_NAME=wikijobcher
-      - DOKUWIKI_FULL_NAME=jobcher
-      - DOKUWIKI_EMAIL=nb@nbtyfood.com
-      - DOKUWIKI_USERNAME=jobcher
-      - DOKUWIKI_PASSWORD=password
-    logging:
-      driver: json-file
-      options:
-        max-size: "2m"
-        max-file: "10"
 
