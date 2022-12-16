@@ -1,0 +1,16 @@
+version: '3'
+services:
+  chatgpt:
+    image: eryajf/chatgpt-dingtalk:latest
+    container_name: chatgpt
+    ports:
+      - '8090:8090'
+    environment:
+      - APIKEY=你的APIkey
+      - SESSIONTIMEOUT=60s
+      - MODEL=text-davinci-003
+      - MAX_TOKENS=512
+      - TEMPREATURE=0.9
+      - SESSION_CLEAR_TOKEN=清空会话 
+    restart: always
+
