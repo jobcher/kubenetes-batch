@@ -52,6 +52,3 @@ rules:
     count: 2
     message: Response time of endpoint relation {name} is more than 1000ms in 2 minutes of last 10 minutes
  
-webhooks:
-#  - http://127.0.0.1/notify/
-#  - http://127.0.0.1/go-wechat/
