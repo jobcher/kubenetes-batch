@@ -1,7 +1,7 @@
 version: '3'
 services:
   skywalking-oap:
-    image: apache/skywalking-oap-server:9.0.0
+    image: apache/skywalking-oap-server:9.1.0
     container_name: skywalking-oap
     volumes:
       - ./alarm-settings.yml:/skywalking/config/alarm-settings.yml
@@ -17,7 +17,7 @@ services:
       SW_ES_PASSWORD: ""
 
   skywalking-ui:
-    image: apache/skywalking-ui:9.0.0
+    image: apache/skywalking-ui:9.1.0
     container_name: skywalking-ui
     depends_on:
       - skywalking-oap
