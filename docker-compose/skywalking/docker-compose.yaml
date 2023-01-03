@@ -1,0 +1,30 @@
+version: '3'
+services:
+  skywalking-oap:
+    image: apache/skywalking-oap-server:9.0.0
+    container_name: skywalking-oap
+    volumes:
+      - ./alarm-settings.yml:/skywalking/config/alarm-settings.yml
+    ports:
+      - "11800:11800"
+      - "12800:12800"
+    environment:
+      TZ: Asia/Shanghai
+      SW_STORAGE: elasticsearch
+      SW_STORAGE_ES_CLUSTER_NODES: 193.0.10.17:9200
+      SW_STORAGE_ES_HTTP_PROTOCOL: "http"
+      SW_ES_USER: ""
+      SW_ES_PASSWORD: ""
+
+  skywalking-ui:
+    image: apache/skywalking-ui:9.0.0
+    container_name: skywalking-ui
+    depends_on:
+      - skywalking-oap
+    links:
+      - skywalking-oap
+    ports:
+      - "8080:8080"
+    environment:
+      TZ: Asia/Shanghai
+      SW_OAP_ADDRESS: http://skywalking-oap:12800
