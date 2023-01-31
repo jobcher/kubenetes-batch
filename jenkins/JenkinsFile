@@ -1,0 +1,100 @@
+pipeline {
+    //使用标签 'node' 的节点
+    agent {label 'node'}
+    //环境变量
+    environment {
+        //运行特征
+        JEN_FEATURE = 'FAILURE'
+        //日志路径
+        JEN_LOG = ''
+        //部署节点
+        JEN_PRODUCTION1 = 'test'
+
+        //部署脚本目录
+        JEN_DIR= '/path/your/name'
+
+        //部署脚本
+        JEN_BATCH = 'test.sh' 
+
+    } 
+    
+    stages {
+        stage ('development'){
+            steps {
+                echo 'deploy'
+                script {
+                    def output = sh(script: "echo 'FAILURE'", returnStdout: true)
+                    if (output.contains('FAILURE')) {
+                        sh 'echo "编译失败结束流水线"; exit 1'
+                    }
+                }
+                echo 'run end'
+            }
+        }
+    }
+
+
+    post {
+        success {
+            script {
+                env.DATETIME = sh(script:"date", returnStdout: true).trim()
+                def job_name = "# ${JOB_NAME} 流水线 执行成功"
+                def jenkinsid = """构建:  第 ${BUILD_ID} 次执行"""
+                def JEN_production = "> 部署节点： ${JEN_PRODUCTION1}"
+                def build_url = "> 部署详情： [详情](${BUILD_URL})"
+                def jen_date = "> 执行时间： ${env.DATETIME}"
+
+                dingtalk (
+                    robot: '$dingding-token-wae12123523',
+                    type: 'MARKDOWN',
+                    title: job_name,
+                    text: [
+                        job_name,
+                        jenkinsid,
+                        '',
+                        '---',
+                        JEN_production,
+                        '',
+                        build_url,
+                        '',
+                        jen_date
+                        ],
+                    at: [
+                        'your phone number'
+                        ]
+                )            
+            }
+        }
+        
+        failure {
+            script {
+                env.DATETIME = sh(script:"date", returnStdout: true).trim()
+                def job_name = "# ${JOB_NAME} 流水线 执行失败"
+                def jenkinsid = """构建:  第 ${BUILD_ID} 次执行"""
+                def JEN_production = "> 部署节点： ${JEN_PRODUCTION1}"
+                def build_url = "> 部署详情： [详情](${BUILD_URL}/console)"
+                def jen_date = "> 执行时间： ${env.DATETIME}"
+
+                dingtalk (
+                    robot: '$dingding-token-wae12123523',
+                    type: 'MARKDOWN',
+                    title: job_name,
+                    text: [
+                        job_name,
+                        jenkinsid,
+                        '',
+                        '---',
+                        JEN_production,
+                        '',
+                        build_url,
+                        '',
+                        jen_date
+                        ],
+                    at: [
+                        'your phone number'
+                        ]
+                )            
+            }
+        }
+    }
+}
