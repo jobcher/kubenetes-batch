@@ -1,4 +1,5 @@
 # kubenetes-batch
+[![Security Status](https://s.murphysec.com/badge/jobcher/kubenetes-batch.svg)](https://www.murphysec.com/p/jobcher/kubenetes-batch)  
 This is kubernetes config configuration file,make use of Argo CD deploy.
 
 ## Install kubenetes (ansible)
