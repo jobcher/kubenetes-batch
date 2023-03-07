@@ -1,0 +1,10 @@
+version: '3'
+services:
+  qinglong-web:
+    image: whyour/qinglong:latest
+    volumes:
+      - ./data:/ql/data
+    ports:
+      - "0.0.0.0:5700:5700"
+    container_name: qinglong-web
+    restart: unless-stopped
