@@ -1,0 +1,18 @@
+version: '3'
+services:
+ chatgpt-web:
+  image: qingshui869413421/chatgpt-web:latest
+  container_name: chatgpt-web
+  ports:
+    - 8080:8080
+  environment:
+    - APIKEY=换成你的key
+    - MODEL=gpt-3.5-turbo-0301
+    - BOT_DESC=你是一个AI助手,我需要你模拟一名温柔贴心的女朋友来回答我的问题.
+    - MAX_TOKENS=512
+    - TEMPREATURE=0.9
+    - TOP_P=1
+    - FREQ=0.0
+    - PRES=0.6
+    - PROXY=chat.160826.xyz
+  restart: always  
