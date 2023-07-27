@@ -1,0 +1,15 @@
+version: '3'
+services:
+  docker-jenkins:
+    user: root
+    image: jenkins/jenkins:lts-jdk11
+    container_name: docker-jenkins
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/jenkins:/var/jenkins_home
+      - /usr/bin/docker:/usr/bin/docker
+      - /usr/local/bin/docker-compose:/usr/local/bin/docker-compose
+    restart: always
