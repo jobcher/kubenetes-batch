@@ -1,0 +1,10 @@
+version: '3'
+services:
+  spring-eureka:
+    image: openjdk:8-jdk-alpine
+    container_name: spring-eureka
+    ports:
+      - "8761:8761"
+    volumes:
+      - ./spring-eureka.jar:/app/spring-eureka.jar # 编译好的eureka jar包
+    command: ["java", "-jar", "/app/spring-eureka.jar"]
