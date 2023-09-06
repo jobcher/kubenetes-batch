@@ -1,0 +1,78 @@
+version: '2'
+services:
+  rocketmq-namesv1:
+    image: apache/rocketmq:4.8.0
+    container_name: rocketmq-namesv1
+    restart: always
+    ports:
+      - 9876:9876
+    volumes:
+      - /rocketmq/logs/namesv1:/home/rocketmq/logs
+    environment:
+      JAVA_OPT_EXT: -server -Xms256M -Xmx256M -Xmn128m
+    command: sh mqnamesrv
+    networks:
+      rocketmq:
+        aliases:
+          - rocketmq-namesv1
+
+  broker-a:
+    image: apache/rocketmq:4.8.0
+    container_name: broker-a
+    links:
+      - rocketmq-namesv1:rocketmq-namesv1
+
+    ports:
+      - 10909:10909
+      - 10911:10911
+      - 10912:10912
+    environment:
+      TZ: Asia/Shanghai
+      NAMESRV_ADDR: "rocketmq-namesv1:9876"
+      JAVA_OPT_EXT: "-server -Xms256M -Xmx256M -Xmn128m"
+    volumes:
+      - /rocketmq/logs/broker-a:/home/rocketmq/logs
+      - /rocketmq/config/broker-a/broker-a.conf:/home/rocketmq/rocketmq-4.8.0/conf/broker.conf
+    command: sh mqbroker  -c /home/rocketmq/rocketmq-4.8.0/conf/broker.conf autoCreateTopicEnable=true &
+    networks:
+      rocketmq:
+        aliases:
+          - broker-a
+  broker-a-s:
+    image: apache/rocketmq:4.8.0
+    container_name: broker-a-s
+    links:
+      - rocketmq-namesv1:rocketmq-namesv1
+    ports:
+      - 11909:10909
+      - 11911:11911
+      - 11912:10912    
+    environment:
+      TZ: Asia/Shanghai
+      NAMESRV_ADDR: "rocketmq-namesv1:9876"
+      JAVA_OPT_EXT: "-server -Xms256M -Xmx256M -Xmn128m"
+    volumes:
+      - /rocketmq/logs/broker-a-s:/home/rocketmq/logs
+      - /rocketmq/config/broker-a-s/broker-a-s.conf:/home/rocketmq/rocketmq-4.8.0/conf/broker.conf
+    command: sh mqbroker  -c /home/rocketmq/rocketmq-4.8.0/conf/broker.conf autoCreateTopicEnable=true &
+    networks:
+      rocketmq:
+        aliases:
+          - broker-a-s
+  
+  rocketmq-console:
+    image: styletang/rocketmq-console-ng
+    container_name: rocketmq-console
+    ports:
+      - 8090:8080
+    environment:
+      JAVA_OPTS: -Drocketmq.namesrv.addr=rocketmq-namesv1:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false
+    networks:
+      rocketmq:
+        aliases:
+          - rocketmq-console
+networks:
+  rocketmq:
+    name: rocketmq
+    driver: bridge
+  
