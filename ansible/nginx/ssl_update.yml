@@ -1,0 +1,15 @@
+- hosts: ssl
+  tasks:
+    - name: copy new ssl certificate 
+      copy:
+        src: ./ssl/FullSSL.crt
+        dest: /cert/FullSSL.crt
+        
+    - name: copy new ssl key
+      copy: 
+        src: ./ssl/SSL.key
+        dest: /cert/SSL.key
+    
+    - name: nginx重载
+      shell:
+        cmd: sudo nginx -s reload
