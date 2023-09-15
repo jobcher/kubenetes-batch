@@ -1,0 +1,17 @@
+version: "3"
+services:
+  calibre-web:
+    image: lscr.io/linuxserver/calibre-web:latest
+    container_name: calibre-web
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+      - DOCKER_MODS=linuxserver/mods:universal-calibre #转换功能
+      - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #允许 Google OAUTH 工作
+    volumes:
+      - /mnt/nas/book/config:/config # 配置
+      - /mnt/nas/book/data:/books # 存储书籍
+    ports:
+      - 8084:8083
+    restart: unless-stopped
