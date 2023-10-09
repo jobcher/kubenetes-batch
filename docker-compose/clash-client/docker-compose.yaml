@@ -1,0 +1,10 @@
+version: '3'
+services:
+  clash-client:
+    image: dreamacro/clash:latest
+    container_name: clash-client
+    restart: always
+    network_mode: host
+    volumes:
+      - ./config:/root/.config/clash
+      - ./ui:/ui
