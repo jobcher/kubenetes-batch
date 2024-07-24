@@ -1,0 +1,21 @@
+# Rmember, leave a key empty if there is no value.  None will be a string,
+# not a Python "NoneType"
+client:
+  hosts: 
+    - 193.0.10.17
+  port: 9200
+  url_prefix:
+  use_ssl: False
+  certificate:
+  client_cert:
+  client_key:
+  ssl_no_validate: False
+  http_auth: elastic:8SCBRzMu8QRatdTi1_Rl
+  timeout: 30
+  master_only: False
+
+logging:
+  loglevel: INFO
+  logfile: /opt/elasticsearch-curator/log/run.log
+  logformat: default
+  blacklist: ['elasticsearch', 'urllib3']
