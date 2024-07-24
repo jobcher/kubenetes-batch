@@ -4,5 +4,7 @@ services:
     image: redis:5.0
     ports:
       - 6389:6379
+    command: redis-server --requirepass "5aTYnDAydd6S7yE6"
+
     volumes:
       - ./redis-data:/data
