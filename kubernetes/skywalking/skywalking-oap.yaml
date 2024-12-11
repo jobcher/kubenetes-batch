@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skywalking-oap
+  namespace: dev-center
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: skywalking-oap
+  template:
+    metadata:
+      labels:
+        app: skywalking-oap
+    spec:
+      containers:
+        - name: skywalking-oap
+          image: apache/skywalking-oap-server:9.0.0
+          ports:
+            - containerPort: 12800
+            - containerPort: 11800
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/skywalking
+              subPath: application.yml
+          env:
+            - name: SW_OAP_SERVER_GRPC_PORT
+              value: "11800"
+            - name: SW_OAP_SERVER_HTTP_PORT
+              value: "12800"
+      volumes:
+        - name: config-volume
+          configMap:
+            name: skywalking-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: skywalking-oap
+  namespace: dev-center
+spec:
+  ports:
+    - port: 11800
+      targetPort: 11800
+      protocol: TCP
+      name: grpc
+    - port: 12800
+      targetPort: 12800
+      protocol: TCP
+      name: http
+  selector:
+    app: skywalking-oap

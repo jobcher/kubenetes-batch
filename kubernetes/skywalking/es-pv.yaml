@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: es-pv
+  namespace: dev-center
+spec:
+  capacity:
+    storage: 10Gi  # 配置存储空间大小
+  accessModes:
+    - ReadWriteOnce  # 允许单个节点挂载
+  persistentVolumeReclaimPolicy: Retain  # 在 PVC 删除时，PV 会保留
+  storageClassName: standard  # 使用默认存储类，或者根据您的集群配置选择
+  hostPath:
+    path: /home/sjgw/data/elasticsearch  # 将数据存储在宿主机的路径中（只适用于开发和测试环境）

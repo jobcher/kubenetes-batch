@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skywalking-ui
+  namespace: dev-center
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: skywalking-ui
+  template:
+    metadata:
+      labels:
+        app: skywalking-ui
+    spec:
+      containers:
+        - name: skywalking-ui
+          image: apache/skywalking-ui:9.0.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SW_OAP_SERVERS
+              value: "skywalking-oap:12800"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: skywalking-ui
+  namespace: dev-center
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: skywalking-ui

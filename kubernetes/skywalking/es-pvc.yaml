@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: es-pvc
+  namespace: dev-center
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi  # 请求的存储大小，与 PV 中的容量匹配
+  storageClassName: standard  # 存储类名称，确保与 PV 的存储类一致
